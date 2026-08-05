@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En Foco">
+  <!-- 05 · Visor de puntos — mixto: puntos + geometría. Las mismas escuadras,
+       pero construidas con píxeles en vez de trazo. Digital sin ser "tecnológico". -->
+  <defs><circle id="d05" r="3.4" fill="currentColor"/></defs>
+  <g>
+    <use href="#d05" x="24" y="24"/><use href="#d05" x="37" y="24"/><use href="#d05" x="24" y="37"/>
+    <use href="#d05" x="76" y="24"/><use href="#d05" x="63" y="24"/><use href="#d05" x="76" y="37"/>
+    <use href="#d05" x="24" y="76"/><use href="#d05" x="37" y="76"/><use href="#d05" x="24" y="63"/>
+    <use href="#d05" x="76" y="76"/><use href="#d05" x="63" y="76"/><use href="#d05" x="76" y="63"/>
+  </g>
+</svg>

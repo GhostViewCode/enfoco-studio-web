@@ -1,0 +1,215 @@
+{
+  "meta": {
+    "name": "MWG Editorial Motion DNA",
+    "description": "Perfil visual extraido de madewithgsap.com. Solo estilo: sistema de tokens, percepcion cualitativa y efectos. Sin contenido, copy ni assets del original.",
+    "source_references": ["https://madewithgsap.com/ (DOM computado + hoja de estilo + tipografias, 2026-07-31)"],
+    "created_at": "2026-07-31"
+  },
+
+  "design_system": {
+    "color": {
+      "palette_type": "monochromatic con un unico acento saturado",
+      "primary": { "hex": "#0A0A0B", "role": "fondo dominante de las secciones oscuras y color de texto sobre secciones claras" },
+      "secondary": { "hex": "#F1F1F1", "role": "fondo de las secciones claras y texto sobre oscuro" },
+      "accent": { "hex": "#C9FE6E", "role": "acento acido reservado a estados activos, badges y detalles minimos; casi nunca en areas grandes" },
+      "neutral": {
+        "scale": ["#FFFFFF", "#F3F3F3", "#F1F1F1", "#999999", "#777777", "#323232", "#232323", "#121212", "#0A0A0B"],
+        "usage": "el gris #999 es estructural: se usa dentro del mismo parrafo para degradar la jerarquia del texto (frase principal en blanco, continuacion en gris)"
+      },
+      "semantic": { "success": "#28DF7D", "warning": "#C9FE6E", "error": "#FC4C3B", "info": "#999999" },
+      "surface": { "background": "#0A0A0B", "card": "#232323", "elevated": "#323232" },
+      "contrast_strategy": "inversion por bloques: cada seccion es totalmente clara o totalmente oscura, a sangre, con corte duro entre ellas. Dentro de cada bloque el contraste es maximo y la jerarquia secundaria se resuelve con gris, no con tamano"
+    },
+
+    "typography": {
+      "type_scale": {
+        "display":    { "size": "200px (clamp ~64px-200px)", "weight": "500", "line_height": "0.95", "tracking": "-0.012em" },
+        "heading_1":  { "size": "120px", "weight": "500", "line_height": "0.95", "tracking": "-0.02em" },
+        "heading_2":  { "size": "48px",  "weight": "500", "line_height": "1.02", "tracking": "-0.02em" },
+        "heading_3":  { "size": "22px",  "weight": "500", "line_height": "1.2",  "tracking": "0" },
+        "body":       { "size": "18px",  "weight": "500", "line_height": "1.4",  "tracking": "0" },
+        "body_small": { "size": "13px",  "weight": "500", "line_height": "1.2",  "tracking": "0" },
+        "caption":    { "size": "12px",  "weight": "500", "line_height": "1.4",  "tracking": "-0.02em" },
+        "overline":   { "size": "11-13px", "weight": "500", "line_height": "1.49", "tracking": "0.02em, uppercase" }
+      },
+      "font_families": {
+        "heading": "LayGrotesk (grotesca neutra de peso medio, propietaria)",
+        "body": "LayGrotesk 500",
+        "mono": "PPNeueMontrealMono 500"
+      },
+      "font_style_notes": "Un unico peso (500) para casi todo el sitio; la jerarquia la construye el tamano, no el grosor. La monoespaciada nunca se usa para lectura: solo micro-etiquetas en mayusculas, indices (#110), marcas de tiempo y botones secundarios. El salto de escala es brutal: de 18px de cuerpo a 120-200px de display sin escalones intermedios"
+    },
+
+    "spacing": {
+      "base_unit": "5px (multiplos de 5: 15 / 25 / 100 / 180 / 260 / 300)",
+      "scale": [5, 10, 15, 25, 50, 100, 180, 260, 300],
+      "content_density": "spacious",
+      "section_rhythm": "padding-top de 180px a 300px entre bloques; las secciones respiran mucho mas de lo habitual y algunas superan varias pantallas de alto por scroll pinneado"
+    },
+
+    "layout": {
+      "grid_system": "12 columnas con variables CSS (--grid-columns:12, --grid-gutter:15px, --grid-margin:25px)",
+      "max_content_width": "sin max-width duro: el grid es 100vw menos margenes de 25px, full-bleed",
+      "columns": "12",
+      "gutter": "15px",
+      "breakpoints": "desktop / tablet / mobile con menu propio en movil",
+      "alignment_tendency": "mixta: bloques de texto alineados a la izquierda sobre el grid, titulares y CTA centrados, media desbordando el grid"
+    },
+
+    "shape": {
+      "border_radius": { "small": "4px", "medium": "12px", "large": "20px", "pill": "100px / 18px en botones pequenos" },
+      "border_usage": "hairline 1px muy sutil solo para separar secciones y tarjetas; casi todo se separa por color de fondo",
+      "divider_style": "linea de 1px a baja opacidad, ancho completo, sin margen lateral"
+    },
+
+    "elevation": {
+      "shadow_style": "none",
+      "levels": { "low": "sin sombra, cambio de fondo (#232323 sobre #0A0A0B)", "medium": "solape de capas y escala", "high": "overlay a pantalla completa" },
+      "depth_cues": "solapamiento de capas, escala y parallax; nunca sombras"
+    },
+
+    "iconography": {
+      "style": "minima, casi ausente; se sustituye por indicadores geometricos (diodo circular, numero de indice, flecha)",
+      "stroke_weight": "1-1.5px",
+      "size_scale": "12-16px inline con el texto",
+      "preferred_set": "iconos propios en SVG, no libreria"
+    },
+
+    "motion": {
+      "easing": "CustomEase tipo expo.out / cubic-bezier(0.16,1,0.3,1) para entradas; lineal para marquesinas",
+      "duration_scale": { "micro": "150-250ms", "normal": "600-800ms", "macro": "1200-2000ms" },
+      "entrance_pattern": "clip/mask reveal de abajo arriba + split por caracteres o lineas con stagger corto",
+      "exit_pattern": "salida por el mismo eje, mas rapida que la entrada",
+      "philosophy": "cinematica: el movimiento ES el producto. Scroll suave global (Lenis), scrub ligado al scroll, nada aparece de golpe"
+    },
+
+    "components": {
+      "button_style": "pildora solida clara sobre fondo oscuro, con roll-over: la etiqueta esta duplicada y sube al hover mientras entra la copia. Version secundaria en mono mayuscula 13px, altura ~35px, radio 18px",
+      "input_style": "campo sin caja, linea inferior o pildora minima, placeholder en gris #999",
+      "card_style": "tarjeta de radio 12-20px con media (video en loop) a sangre dentro, etiqueta mono con indice y marca de tiempo superpuesta",
+      "navigation_pattern": "barra fija fina, logo a la izquierda, enlaces centrados en mono mayuscula, CTA pildora a la derecha; overlay a pantalla completa en movil",
+      "modal_style": "overlay a pantalla completa con entrada por mascara, cierre con boton discreto",
+      "list_style": "listas de features en mono mayuscula con separador de 1px por fila",
+      "component_notes": "el toggle de precios (trimestral/anual) y el contador grande son componentes protagonistas, no accesorios"
+    }
+  },
+
+  "design_style": {
+    "aesthetic": {
+      "mood": ["nocturno", "tecnico", "premium", "confiado", "energico"],
+      "visual_metaphor": "una sala de montaje: fondo negro, piezas de video flotando y etiquetadas como en una linea de tiempo",
+      "era_influence": "swiss grid contemporaneo mezclado con estetica de estudio creativo 2024-2026 (Awwwards)",
+      "genre": "indie creative / producto para desarrolladores con acabado de estudio",
+      "personality_traits": ["meticuloso", "seguro de si mismo", "sin ruido", "obsesionado con el detalle"],
+      "adjectives": ["nitido", "amplio", "cinematico", "monocromo", "preciso"]
+    },
+    "visual_language": {
+      "complexity": "minimal en lo estatico, rico en lo animado",
+      "ornamentation": "subtle accents: diodos, indices numerados, marquesinas de texto",
+      "whitespace_usage": "el espacio en negro es el material principal; bloques enteros solo con una frase",
+      "visual_weight_distribution": "picos extremos: pantallas casi vacias alternadas con tipografia de 200px",
+      "focal_strategy": "single hero element por seccion, revelado progresivamente con el scroll",
+      "contrast_level": "muy alto",
+      "texture_usage": "ninguna textura; la unica textura es el video en movimiento"
+    },
+    "composition": {
+      "hierarchy_method": "scale contrast extremo + degradado de color dentro del propio texto",
+      "balance_type": "asimetrica con anclajes centrados",
+      "flow_direction": "vertical con interrupciones horizontales (galeria arrastrable, marquesinas)",
+      "grouping_strategy": "una idea por pantalla, etiquetada con una overline mono",
+      "negative_space_role": "estructural: el vacio marca el ritmo y hace de pausa entre argumentos"
+    },
+    "imagery": {
+      "photo_treatment": "casi no hay foto fija; todo son videos en loop, mudos, recortados en tarjeta",
+      "illustration_style": "ninguna ilustracion",
+      "graphic_elements": "indices (#110), marcas de tiempo, diodos, lineas de 1px, contadores",
+      "pattern_usage": "repeticion de etiquetas mono como patron rítmico",
+      "image_shape": "rectangulos de radio 12-20px, algunos a sangre"
+    },
+    "interaction_feel": {
+      "feedback_style": "inmediato y fisico: todo responde al cursor y al arrastre",
+      "hover_behavior": "roll-over de texto, escala sutil, reproduccion del video al entrar",
+      "transition_personality": "smooth glide con salida exponencial",
+      "loading_style": "intro animada con revelado por mascara antes del hero",
+      "microinteraction_density": "alta"
+    },
+    "brand_voice_in_ui": {
+      "tone": "directo, tecnico, sin adornos",
+      "formality": "informal profesional",
+      "cta_style": "direct imperative corto en mayuscula mono",
+      "empty_state_approach": "no aplica / minimo",
+      "error_tone": "neutro y breve"
+    }
+  },
+
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "heavy-immersive",
+      "performance_tier": "medium (sin Canvas ni WebGL por decision explicita; todo DOM + transform)",
+      "fallback_strategy": "reducir a CSS y desactivar scrub en movil; soporte tactil explicito",
+      "primary_technology": "GSAP (ScrollTrigger, SplitText, Draggable, InertiaPlugin, MorphSVG, CustomEase) + Lenis + Matter.js"
+    },
+    "background_effects": {
+      "type": "video-bg",
+      "description": "bloques de video en loop mudos como fondo y como contenido de tarjeta; no hay gradientes animados ni ruido",
+      "technology": "HTML5 video (24 elementos en la home) con reproduccion perezosa al entrar en viewport",
+      "params": { "color_palette": ["#0A0A0B", "#F1F1F1", "#232323"], "speed": "loop natural", "density": "alta", "opacity": "1", "blend_mode": "normal" }
+    },
+    "particle_systems": {
+      "enabled": true,
+      "type": "custom (cuerpos fisicos)",
+      "description": "elementos con fisica real (Matter.js) que caen, colisionan y se pueden arrastrar",
+      "technology": "Matter.js sincronizado con nodos DOM",
+      "params": { "count": "~10-20", "shape": "pildoras y tarjetas DOM", "size_range": "40-200px", "movement_pattern": "gravedad + colision + arrastre con inercia", "color_behavior": "estatico", "interaction": "drag / click-burst", "spawn_area": "seccion contenida" }
+    },
+    "3d_elements": {
+      "enabled": true,
+      "type": "abstract-geometry",
+      "description": "profundidad y perspectiva conseguidas solo con transform 3D de CSS sobre nodos DOM, sin renderer",
+      "technology": "CSS transform-style: preserve-3d controlado por GSAP",
+      "params": { "renderer": "ninguno (DOM)", "lighting": "simulada con capas de color", "camera": "perspective CSS animada con el scroll", "materials": "planos de video", "geometry": "planos apilados", "post_processing": [], "interaction_model": "scroll y puntero" }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none", "description": "ninguno; es un argumento de venta explicito del sitio", "technology": "n/a",
+      "params": { "uniforms": [], "vertex_manipulation": "none", "fragment_output": "none", "noise_type": "none", "distortion": "none" }
+    },
+    "scroll_effects": {
+      "parallax": { "enabled": true, "layers": "2-4", "depth_range": "10-30% de desfase", "speed_curve": "lineal ligada al scroll" },
+      "scroll_triggered_animations": { "enabled": true, "trigger_points": "top 80% para entradas, pin de seccion completa para secuencias", "animation_type": ["clip-reveal", "fade-up", "counter", "split-line"], "scrub_behavior": "scrub suave (~1) en secuencias largas; disparo unico en entradas" },
+      "scroll_morphing": { "enabled": true, "description": "bloques de texto gigantes que cambian de escala y de color mientras la seccion esta pinneada, y morphing de formas SVG" }
+    },
+    "text_effects": {
+      "type": "split-letter-animate",
+      "description": "titulares partidos por caracteres y por lineas, revelados con mascara desde abajo; en el CTA final cada letra esta duplicada y rota verticalmente al hover",
+      "technology": "GSAP SplitText",
+      "params": { "split_strategy": "by-char y by-line", "animation_per_unit": "y:100% -> 0 con mascara overflow hidden", "stagger": "0.02-0.04s", "effect_style": "mask reveal + roll" }
+    },
+    "cursor_effects": {
+      "enabled": true,
+      "type": "magnetic-buttons + drag affordance",
+      "description": "los CTA reaccionan al cursor y la galeria principal se arrastra con inercia; etiqueta persistente DRAG TO EXPLORE",
+      "params": { "shape": "n/a (sin cursor custom)", "size": "n/a", "blend_mode": "normal", "trail": "inercia en el arrastre", "interaction_zone": "galeria y botones" }
+    },
+    "image_effects": {
+      "type": "reveal-clip",
+      "description": "los medios entran con mascara y escala; al hover la tarjeta escala levemente y el video arranca",
+      "technology": "CSS clip-path + transform con GSAP",
+      "params": { "filter_pipeline": ["ninguno"], "hover_transform": "scale(1.02) + play", "reveal_animation": "clip inset de abajo arriba", "distortion_type": "ninguna" }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": false, "style": "none",
+      "params": { "blur_radius": "0", "transparency": "solo overlays planos rgba(18,18,18,0.3)", "border_treatment": "none", "shadow_type": "none", "light_source_angle": "n/a" }
+    },
+    "canvas_drawings": {
+      "enabled": false, "type": "none", "description": "cero elementos canvas en la pagina", "technology": "n/a",
+      "params": { "draw_method": "n/a", "animation_loop": "n/a", "color_scheme": "n/a", "responsiveness": "n/a", "interaction": "n/a" }
+    },
+    "svg_animations": {
+      "enabled": true, "type": "morph-shapes + logo-reveal",
+      "description": "MorphSVGPlugin cargado: transiciones de forma en marcas y en indicadores",
+      "params": { "animation_method": "GSAP MorphSVG", "path_morphing": "si", "stroke_animation": "puntual", "filter_effects": "ninguno" }
+    },
+    "composite_notes": "La firma del sitio es la suma de tres cosas baratas de imitar y una cara: (1) inversion de bloques claro/oscuro a sangre con corte duro, (2) micro-etiquetas monoespaciadas en mayuscula con indice numerado y diodo, (3) escala tipografica sin escalones (18px -> 120px) con degradado de gris dentro del mismo parrafo, y (4) scroll suave global con secuencias pinneadas y scrub. Las tres primeras se reproducen con CSS puro; la cuarta es la unica que exige libreria. No hay Canvas ni WebGL en todo el sitio, lo cual demuestra que la sensacion premium viene del ritmo y del contraste, no de la tecnologia."
+  }
+}

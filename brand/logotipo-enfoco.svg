@@ -1,0 +1,25 @@
+<svg viewBox="0 0 150 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En Foco">
+  <!-- LOGOTIPO EN FOCO — marca 03 "Enfoque" + nombre.
+       Los puntos crecen y se solidifican hacia el centro: una imagen entrando
+       en foco. Respecto a la propuesta original se han engordado los tres
+       tamaños de punto (2,6 / 4,6 / 8,5 en vez de 1,8 / 3,2 / 6) para que la
+       marca siga leyéndose a 26 px de alto en la barra de navegación.
+       El nombre usa currentColor: se invierte solo sobre fondo oscuro. -->
+  <g fill="#C1603F" transform="scale(0.4)">
+    <g opacity=".3">
+      <circle cx="16" cy="16" r="2.6"/><circle cx="33" cy="16" r="2.6"/><circle cx="50" cy="16" r="2.6"/><circle cx="67" cy="16" r="2.6"/><circle cx="84" cy="16" r="2.6"/>
+      <circle cx="16" cy="33" r="2.6"/><circle cx="84" cy="33" r="2.6"/>
+      <circle cx="16" cy="50" r="2.6"/><circle cx="84" cy="50" r="2.6"/>
+      <circle cx="16" cy="67" r="2.6"/><circle cx="84" cy="67" r="2.6"/>
+      <circle cx="16" cy="84" r="2.6"/><circle cx="33" cy="84" r="2.6"/><circle cx="50" cy="84" r="2.6"/><circle cx="67" cy="84" r="2.6"/><circle cx="84" cy="84" r="2.6"/>
+    </g>
+    <g opacity=".68">
+      <circle cx="33" cy="33" r="4.6"/><circle cx="50" cy="33" r="4.6"/><circle cx="67" cy="33" r="4.6"/>
+      <circle cx="33" cy="50" r="4.6"/><circle cx="67" cy="50" r="4.6"/>
+      <circle cx="33" cy="67" r="4.6"/><circle cx="50" cy="67" r="4.6"/><circle cx="67" cy="67" r="4.6"/>
+    </g>
+    <circle cx="50" cy="50" r="8.5"/>
+  </g>
+  <text x="52" y="28" fill="currentColor"
+        font-family="Fraunces, Georgia, serif" font-size="25" letter-spacing="-0.6">En Foco</text>
+</svg>

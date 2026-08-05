@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En Foco">
+  <!-- 06 · Telémetro — mixto: líneas + geometría. El visor partido por la línea
+       de foco dividido de una cámara manual: las dos mitades se alinean cuando
+       la imagen está enfocada. Guiño a quien sabe de fotografía. -->
+  <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square">
+    <path d="M20 36V20h16"/>
+    <path d="M80 36V20H64"/>
+    <path d="M20 64v16h16"/>
+    <path d="M80 64v16H64"/>
+  </g>
+  <g stroke="currentColor" stroke-width="4" stroke-linecap="round">
+    <line x1="28" y1="44" x2="46" y2="44"/>
+    <line x1="54" y1="56" x2="72" y2="56"/>
+  </g>
+</svg>

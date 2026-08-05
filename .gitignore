@@ -1,0 +1,8 @@
+# Secretos: nunca deben salir de este ordenador
+.env
+.env.*
+!.env.example
+
+node_modules/
+.netlify/
+*.log

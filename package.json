@@ -1,0 +1,15 @@
+{
+  "name": "enfoco-studio-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web de En Foco Studio. Sitio estatico bilingue mas una funcion de servidor para el formulario de contacto.",
+  "type": "module",
+  "scripts": {
+    "dev": "node server/dev.js",
+    "test:email": "node server/probar-envio.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "resend": "^4.0.0"
+  }
+}

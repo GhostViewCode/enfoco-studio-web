@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>En Foco Studio · Propuestas de logotipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  :root{
+    --bone:#FAF8F5; --bone-2:#F2EEE8; --ink:#151310; --terra:#C1603F;
+    --muted:#7A7167; --line:rgba(21,19,16,.13);
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--sans);line-height:1.55}
+  .wrap{max-width:76rem;margin-inline:auto;padding:clamp(2rem,5vw,4.5rem) clamp(1.25rem,4vw,3.5rem)}
+  .label{font-family:var(--mono);font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,5vw,3.25rem);line-height:1.02;letter-spacing:-.025em;margin:.75rem 0 1rem;max-width:20ch}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;margin:0 0 1.5rem}
+  p.lead{color:var(--muted);max-width:60ch;margin:0 0 1rem}
+  hr{border:0;border-top:1px solid var(--line);margin:clamp(2.5rem,6vw,4.5rem) 0}
+
+  /* Rejilla de propuestas */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem}
+  .card{background:#fff;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column}
+  .card.pick{box-shadow:inset 0 0 0 2px var(--terra)}
+  .mark{aspect-ratio:1;display:grid;place-items:center;padding:2.25rem;color:var(--ink)}
+  .mark svg{width:100%;height:auto;display:block}
+  .meta{padding:1rem 1.15rem 1.25rem;border-top:1px solid var(--line)}
+  .meta b{display:block;font-family:var(--serif);font-weight:400;font-size:1.15rem;letter-spacing:-.02em}
+  .meta small{display:block;margin-top:.4rem;font-size:.8125rem;color:var(--muted);line-height:1.5}
+  .tag{display:inline-block;margin-top:.7rem;font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
+
+  /* Pruebas de comportamiento */
+  .tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
+  .test{padding:1.5rem;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line);background:#fff}
+  .test.dark{background:var(--ink);color:var(--bone);box-shadow:none}
+  .test.terra{background:var(--terra);color:#fff;box-shadow:none}
+  .test .row{display:flex;align-items:flex-end;gap:1.25rem;margin-top:1rem}
+  .test .row svg{display:block}
+  .test .cap{font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-top:.9rem}
+
+  /* Lockups */
+  .lock{background:#fff;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line);padding:clamp(1.75rem,4vw,3rem);margin-bottom:1.25rem}
+  .lock.dark{background:var(--ink);color:var(--bone);box-shadow:none}
+  .lock svg{display:block;max-width:100%;height:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="label">En Foco Studio · Identidad</p>
+  <h1>Ocho caminos para la misma idea.</h1>
+  <p class="lead">
+    Todas parten del visor de enfoque: cuatro escuadras que enmarcan. Lo que cambia es
+    cómo se construye ese marco y cuánto se aleja de lo literal. Marcadas en terracota,
+    mi recomendación.
+  </p>
+
+  <hr>
+
+  <h2>Las propuestas</h2>
+  <div class="grid">
+
+    <div class="card pick">
+      <div class="mark"><svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><path d="M22 38V22h16"/><path d="M78 38V22H62"/><path d="M22 62v16h16"/><path d="M78 62v16H62"/></g></svg></div>
+      <div class="meta"><b>01 · Visor</b><small>Geometría pura. El centro vacío es el logo: lo que enmarcas es lo que se ve. Es la más sobria y la que mejor convive con la tipografía serif.</small><span class="tag">Recomendada · marca principal</span></div>
+    </div>
+
+    <div class="card pick">
+      <div class="mark"><svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><path d="M20 36V20h16"/><path d="M80 36V20H64"/><path d="M20 64v16h16"/><path d="M80 64v16H64"/></g><circle cx="50" cy="50" r="7" fill="currentColor"/></svg></div>
+      <div class="meta"><b>02 · Punto de foco</b><small>El visor cierra sobre un punto sólido: el instante en que la cámara engancha el foco. El punto es el único sitio donde entra el terracota.</small><span class="tag">Recomendada · favicon y avatar</span></div>
+    </div>
+
+    <div class="card">
+      <div class="mark"><svg viewBox="0 0 100 100"><g fill="currentColor"><g opacity="0.3"><circle cx="24" cy="24" r="1.8"/><circle cx="37" cy="24" r="1.8"/><circle cx="50" cy="24" r="1.8"/><circle cx="63" cy="24" r="1.8"/><circle cx="76" cy="24" r="1.8"/><circle cx="24" cy="37" r="1.8"/><circle cx="76" cy="37" r="1.8"/><circle cx="24" cy="50" r="1.8"/><circle cx="76" cy="50" r="1.8"/><circle cx="24" cy="63" r="1.8"/><circle cx="76" cy="63" r="1.8"/><circle cx="24" cy="76" r="1.8"/><circle cx="37" cy="76" r="1.8"/><circle cx="50" cy="76" r="1.8"/><circle cx="63" cy="76" r="1.8"/><circle cx="76" cy="76" r="1.8"/></g><g opacity="0.68"><circle cx="37" cy="37" r="3.2"/><circle cx="50" cy="37" r="3.2"/><circle cx="63" cy="37" r="3.2"/><circle cx="37" cy="50" r="3.2"/><circle cx="63" cy="50" r="3.2"/><circle cx="37" cy="63" r="3.2"/><circle cx="50" cy="63" r="3.2"/><circle cx="63" cy="63" r="3.2"/></g><circle cx="50" cy="50" r="6"/></g></svg></div>
+      <div class="meta"><b>03 · Enfoque</b><small>El desenfoque hecho geometría: los puntos crecen y se solidifican hacia el centro. Cuenta el servicio entero sin dibujar una cámara. Pierde definición por debajo de 32 px.</small></div>
+    </div>
+
+    <div class="card">
+      <div class="mark"><svg viewBox="0 0 100 100"><defs><clipPath id="f4"><rect x="22" y="22" width="56" height="56" rx="3"/></clipPath></defs><g clip-path="url(#f4)" stroke="currentColor" stroke-linecap="round"><line x1="26" y1="29" x2="74" y2="29" stroke-width="1.4" opacity=".35"/><line x1="26" y1="36" x2="74" y2="36" stroke-width="2" opacity=".5"/><line x1="26" y1="43" x2="74" y2="43" stroke-width="2.8" opacity=".68"/><line x1="26" y1="50" x2="74" y2="50" stroke-width="3.6" opacity=".82"/><line x1="26" y1="57" x2="74" y2="57" stroke-width="4.4"/><line x1="26" y1="64" x2="74" y2="64" stroke-width="5.2"/><line x1="26" y1="71" x2="74" y2="71" stroke-width="6"/></g><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M16 30V16h14"/><path d="M84 30V16H70"/><path d="M16 70v14h14"/><path d="M84 70v14H70"/></g></svg></div>
+      <div class="meta"><b>04 · Resolución</b><small>Líneas que engordan hacia abajo, como una imagen que carga y se resuelve dentro del cuadro. La más «editorial» de todas, y la más difícil de reducir.</small></div>
+    </div>
+
+    <div class="card">
+      <div class="mark"><svg viewBox="0 0 100 100"><defs><circle id="d5" r="3.4" fill="currentColor"/></defs><g><use href="#d5" x="24" y="24"/><use href="#d5" x="37" y="24"/><use href="#d5" x="24" y="37"/><use href="#d5" x="76" y="24"/><use href="#d5" x="63" y="24"/><use href="#d5" x="76" y="37"/><use href="#d5" x="24" y="76"/><use href="#d5" x="37" y="76"/><use href="#d5" x="24" y="63"/><use href="#d5" x="76" y="76"/><use href="#d5" x="63" y="76"/><use href="#d5" x="76" y="63"/></g></svg></div>
+      <div class="meta"><b>05 · Visor de puntos</b><small>Las mismas escuadras construidas con píxeles en lugar de trazo. Digital sin caer en lo «tecnológico». Se lee peor en tamaños pequeños.</small></div>
+    </div>
+
+    <div class="card">
+      <div class="mark"><svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><path d="M20 36V20h16"/><path d="M80 36V20H64"/><path d="M20 64v16h16"/><path d="M80 64v16H64"/></g><g stroke="currentColor" stroke-width="4" stroke-linecap="round"><line x1="28" y1="44" x2="46" y2="44"/><line x1="54" y1="56" x2="72" y2="56"/></g></svg></div>
+      <div class="meta"><b>06 · Telémetro</b><small>El visor partido por la línea de foco dividido de una cámara manual: las dos mitades se alinean cuando la imagen está enfocada. Guiño para quien sabe de fotografía.</small></div>
+    </div>
+
+    <div class="card">
+      <div class="mark"><svg viewBox="0 0 100 100"><path fill="currentColor" fill-rule="evenodd" d="M14 14h72v72H14z M30 30v40h40V30z"/><path fill="currentColor" d="M38 38h24v24H38z" opacity=".18"/></svg></div>
+      <div class="meta"><b>07 · Ventana</b><small>Masa sólida con el visor recortado en negativo. Pensada como icono de aplicación: es la que mejor aguanta a 16 px y sobre fondos de color.</small></div>
+    </div>
+
+    <div class="card">
+      <div class="mark"><svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square" transform="rotate(45 50 50)"><path d="M26 42V26h16"/><path d="M74 42V26H58"/><path d="M26 58v16h16"/><path d="M74 58v16H58"/></g><circle cx="50" cy="50" r="5.5" fill="currentColor"/></svg></div>
+      <div class="meta"><b>08 · Apertura</b><small>El visor girado 45°, como las hojas de un diafragma cerrándose. La de más energía y la menos literal; también la que menos dialoga con la retícula del sitio.</small></div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <h2>Cómo se comporta la recomendada</h2>
+  <p class="lead">La 01 como marca, la 02 cuando hace falta un punto focal en formato cuadrado.</p>
+
+  <div class="tests">
+    <div class="test">
+      <p class="label">Reducción</p>
+      <div class="row">
+        <svg width="16" height="16" viewBox="0 0 100 100" style="color:var(--ink)"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square"><path d="M22 38V22h16"/><path d="M78 38V22H62"/><path d="M22 62v16h16"/><path d="M78 62v16H62"/></g></svg>
+        <svg width="24" height="24" viewBox="0 0 100 100" style="color:var(--ink)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square"><path d="M22 38V22h16"/><path d="M78 38V22H62"/><path d="M22 62v16h16"/><path d="M78 62v16H62"/></g></svg>
+        <svg width="40" height="40" viewBox="0 0 100 100" style="color:var(--ink)"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="square"><path d="M22 38V22h16"/><path d="M78 38V22H62"/><path d="M22 62v16h16"/><path d="M78 62v16H62"/></g></svg>
+        <svg width="64" height="64" viewBox="0 0 100 100" style="color:var(--ink)"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><path d="M22 38V22h16"/><path d="M78 38V22H62"/><path d="M22 62v16h16"/><path d="M78 62v16H62"/></g></svg>
+      </div>
+      <p class="cap">16 · 24 · 40 · 64 px — el trazo se engorda al reducir</p>
+    </div>
+
+    <div class="test dark">
+      <p class="label" style="color:rgba(250,248,245,.6)">Sobre negro</p>
+      <div class="row">
+        <svg width="64" height="64" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><path d="M22 38V22h16"/><path d="M78 38V22H62"/><path d="M22 62v16h16"/><path d="M78 62v16H62"/></g></svg>
+        <svg width="64" height="64" viewBox="0 0 100 100" style="color:var(--terra)"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><path d="M20 36V20h16"/><path d="M80 36V20H64"/><path d="M20 64v16h16"/><path d="M80 64v16H64"/></g><circle cx="50" cy="50" r="7" fill="currentColor"/></svg>
+      </div>
+      <p class="cap">Hueso y terracota</p>
+    </div>
+
+    <div class="test terra">
+      <p class="label" style="color:rgba(255,255,255,.7)">Sobre acento</p>
+      <div class="row">
+        <svg width="64" height="64" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><path d="M22 38V22h16"/><path d="M78 38V22H62"/><path d="M22 62v16h16"/><path d="M78 62v16H62"/></g></svg>
+        <svg width="64" height="64" viewBox="0 0 100 100"><path fill="currentColor" fill-rule="evenodd" d="M14 14h72v72H14z M30 30v40h40V30z"/></svg>
+      </div>
+      <p class="cap">Marca y icono sólido en blanco</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>El logotipo completo</h2>
+  <p class="lead">
+    Escuadras + nombre en Fraunces. El nombre corto («En Foco») para navegación y usos
+    pequeños; el largo («En Foco Studio») para firma, factura y pie de documento.
+  </p>
+
+  <div class="lock">
+    <svg viewBox="0 0 340 72" width="440" role="img" aria-label="En Foco">
+      <g fill="none" stroke="#C1603F" stroke-width="2.6" stroke-linecap="square">
+        <path d="M4 24V4h20"/><path d="M336 24V4h-20"/><path d="M4 48v20h20"/><path d="M336 48v20h-20"/>
+      </g>
+      <text x="170" y="49" text-anchor="middle" fill="#151310"
+            font-family="Fraunces, Georgia, serif" font-size="44" letter-spacing="-1">En Foco</text>
+    </svg>
+    <p class="cap" style="font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:1.25rem">Principal · horizontal</p>
+  </div>
+
+  <div class="lock dark">
+    <svg viewBox="0 0 340 108" width="440" role="img" aria-label="En Foco Studio">
+      <g fill="none" stroke="#C1603F" stroke-width="2.6" stroke-linecap="square">
+        <path d="M4 24V4h20"/><path d="M336 24V4h-20"/><path d="M4 84v20h20"/><path d="M336 84v20h-20"/>
+      </g>
+      <text x="170" y="52" text-anchor="middle" fill="#FAF8F5"
+            font-family="Fraunces, Georgia, serif" font-size="44" letter-spacing="-1">En Foco</text>
+      <text x="170" y="78" text-anchor="middle" fill="#9A9086"
+            font-family="'IBM Plex Mono', monospace" font-size="11" letter-spacing="5.5">STUDIO</text>
+    </svg>
+    <p class="cap" style="font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,245,.55);margin-top:1.25rem">Firma completa · sobre negro</p>
+  </div>
+
+  <hr>
+
+  <p class="label">Nota técnica</p>
+  <p class="lead" style="margin-top:.75rem">
+    En el logotipo completo el nombre va como texto SVG, no como trazado. En la web
+    funciona porque Fraunces se carga desde Google Fonts. Antes de mandárselo a una
+    imprenta o a un tercero, conviértelo a curvas: en Figma o Illustrator es una sola
+    orden, y evita que el archivo se rompa en un ordenador sin la fuente instalada.
+  </p>
+
+</div>
+</body>
+</html>

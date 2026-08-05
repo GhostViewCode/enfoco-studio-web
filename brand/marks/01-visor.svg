@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En Foco">
+  <!-- 01 · Visor — geometría pura. Las cuatro escuadras del visor, nada más.
+       El centro vacío ES el logo: lo que enmarcas es lo que se ve. -->
+  <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square">
+    <path d="M22 38V22h16"/>
+    <path d="M78 38V22H62"/>
+    <path d="M22 62v16h16"/>
+    <path d="M78 62v16H62"/>
+  </g>
+</svg>

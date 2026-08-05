@@ -1,0 +1,1345 @@
+/* =============================================================================
+   EN FOCO STUDIO — HOJA DE ESTILO ÚNICA
+   Compartida por /es/ y /en/. No hay dependencias externas salvo las fuentes.
+   Orden: tokens · base · utilidades · layout · componentes · secciones · media queries
+   ========================================================================== */
+
+/* ---------- 1. TOKENS ----------------------------------------------------- */
+:root{
+  /* Color */
+  --bone:#FAF8F5;
+  --bone-2:#F2EEE8;          /* superficie ligeramente hundida sobre hueso */
+  --ink:#151310;
+  --ink-2:#1F1C18;           /* tarjeta sobre fondo oscuro */
+  --ink-3:#2A2621;           /* elevado sobre fondo oscuro */
+  --terra:#C1603F;
+  --terra-dark:#A94F31;
+  --terra-soft:rgba(193,96,63,.10);
+  --muted:#7A7167;           /* texto secundario sobre claro */
+  --muted-dark:#9A9086;      /* texto secundario sobre oscuro */
+  --line:rgba(21,19,16,.13);
+  --line-dark:rgba(250,248,245,.16);
+  --ok:#3F7D5C;
+  --err:#B03A2E;
+
+  /* Tipografía */
+  --serif:'Fraunces','Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Consolas,'Liberation Mono',monospace;
+
+  /* Escala tipográfica — salto grande y deliberado, sin escalones intermedios */
+  --fs-display:clamp(2.5rem,7.4vw,6.25rem);
+  --fs-h1:clamp(2.25rem,7vw,5.25rem);
+  --fs-h2:clamp(1.75rem,4.6vw,3.25rem);
+  --fs-h3:clamp(1.25rem,2.4vw,1.6rem);
+  --fs-body:clamp(1rem,1.15vw,1.125rem);
+  --fs-small:.9375rem;
+  --fs-label:.6875rem;
+
+  /* Ritmo */
+  --gap:1.5rem;
+  --margin:clamp(1.25rem,4vw,3.5rem);
+  --section:clamp(5.5rem,13vw,11.5rem);
+  --maxw:78rem;
+
+  /* Forma */
+  --r-s:4px;
+  --r-m:12px;
+  --r-l:20px;
+  --r-pill:100px;
+
+  /* Motion */
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,.05,.36,1);
+  --t-fast:.22s;
+  --t:.5s;
+  --t-slow:.9s;
+}
+
+/* ---------- 2. BASE ------------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:5.5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--bone);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:var(--fs-body);
+  line-height:1.55;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+body.no-scroll{overflow:hidden}
+
+img,video,svg{max-width:100%;display:block}
+img,video{height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+ul,ol{margin:0;padding:0;list-style:none}
+h1,h2,h3,h4,p,figure,dl,dd{margin:0}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+
+::selection{background:var(--terra);color:var(--bone)}
+
+:focus-visible{
+  outline:2px solid var(--terra);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:999;
+  background:var(--ink);color:var(--bone);padding:.85rem 1.25rem;border-radius:0 0 var(--r-m) 0;
+}
+.skip:focus{left:0}
+
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+/* ---------- 3. TIPOGRAFÍA ------------------------------------------------- */
+.display,.h1,.h2,.h3{
+  font-family:var(--serif);
+  font-weight:400;
+  font-optical-sizing:auto;
+  letter-spacing:-.025em;
+  text-wrap:balance;
+}
+.display{font-size:var(--fs-display);line-height:.92}
+.h1{font-size:var(--fs-h1);line-height:.98}
+.h2{font-size:var(--fs-h2);line-height:1.02}
+.h3{font-size:var(--fs-h3);line-height:1.2;letter-spacing:-.015em}
+
+/* El truco editorial de MWG: dos tonos dentro del mismo párrafo/titular */
+.dim{color:var(--muted)}
+.on-dark .dim{color:var(--muted-dark)}
+.em{color:var(--terra)}
+.italic{font-style:italic}
+
+.lead{
+  font-size:clamp(1.0625rem,1.9vw,1.375rem);
+  line-height:1.5;
+  color:var(--muted);
+  max-width:44ch;
+}
+.on-dark .lead{color:var(--muted-dark)}
+
+.body-s{font-size:var(--fs-small);line-height:1.6;color:var(--muted)}
+.on-dark .body-s{color:var(--muted-dark)}
+
+/* Micro-etiqueta monoespaciada — la firma estructural del sistema */
+.label{
+  font-family:var(--mono);
+  font-size:var(--fs-label);
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  line-height:1.4;
+  color:var(--muted);
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+}
+.on-dark .label{color:var(--muted-dark)}
+.label--ink{color:var(--ink)}
+.on-dark .label--ink{color:var(--bone)}
+.label::before{
+  content:'';
+  width:5px;height:5px;border-radius:50%;
+  background:var(--terra);
+  flex:none;
+  align-self:flex-start;
+  margin-top:.5em;          /* alineado con la primera línea si la etiqueta parte */
+}
+.label.no-dot::before{display:none}
+.label .idx{
+  font-variant-numeric:tabular-nums;
+  color:var(--terra);
+}
+
+/* ---------- 4. LAYOUT ----------------------------------------------------- */
+.wrap{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:var(--margin);
+}
+.wrap-wide{max-width:100rem}
+
+section{position:relative}
+.sec{padding-block:var(--section)}
+.sec-tight{padding-block:calc(var(--section) * .6)}
+
+/* Inversión por bloques, a sangre, con corte duro */
+.on-dark{background:var(--ink);color:var(--bone)}
+.on-bone-2{background:var(--bone-2)}
+
+.grid{display:grid;gap:var(--gap)}
+.two{grid-template-columns:repeat(2,1fr)}
+.three{grid-template-columns:repeat(3,1fr)}
+.four{grid-template-columns:repeat(4,1fr)}
+
+.sec-head{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+  margin-bottom:clamp(2.5rem,5vw,4.5rem);
+  max-width:62rem;
+}
+.sec-head .h2{max-width:20ch}
+
+/* ---------- 5. ESCUADRAS DE ENFOQUE (motivo de marca) --------------------- */
+/* Las cuatro esquinas del visor de una cámara. Se reutilizan como elemento de
+   interfaz: enmarcan títulos, señalan el elemento activo y aparecen al hover. */
+.corners{position:absolute;inset:0;pointer-events:none;z-index:2}
+.corners i{
+  position:absolute;
+  width:14px;height:14px;
+  border:1.5px solid var(--terra);
+  opacity:0;
+  transition:opacity var(--t) var(--ease),transform var(--t) var(--ease);
+}
+.corners i:nth-child(1){top:10px;left:10px;border-right:0;border-bottom:0;transform:translate(6px,6px)}
+.corners i:nth-child(2){top:10px;right:10px;border-left:0;border-bottom:0;transform:translate(-6px,6px)}
+.corners i:nth-child(3){bottom:10px;left:10px;border-right:0;border-top:0;transform:translate(6px,-6px)}
+.corners i:nth-child(4){bottom:10px;right:10px;border-left:0;border-top:0;transform:translate(-6px,-6px)}
+.has-corners:hover .corners i,
+.has-corners:focus-within .corners i,
+.corners.on i{opacity:1;transform:translate(0,0)}
+
+/* Título enmarcado por escuadras (versión estática) */
+.framed{position:relative;display:inline-block;padding:.6rem 1.1rem;margin:-.6rem -1.1rem}
+.framed::before,.framed::after{
+  content:'';position:absolute;width:12px;height:12px;border:1.5px solid var(--terra);
+}
+.framed::before{top:0;left:0;border-right:0;border-bottom:0}
+.framed::after{bottom:0;right:0;border-left:0;border-top:0}
+
+/* ---------- 6. BOTONES ---------------------------------------------------- */
+.btn{
+  --btn-bg:var(--terra);
+  --btn-fg:#fff;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  padding:.95rem 1.65rem;
+  min-height:52px;
+  border-radius:var(--r-pill);
+  background:var(--btn-bg);
+  color:var(--btn-fg);
+  font-family:var(--sans);
+  font-size:.9375rem;
+  font-weight:500;
+  letter-spacing:-.005em;
+  line-height:1.2;
+  text-align:center;
+  overflow:hidden;
+  isolation:isolate;
+  transition:background var(--t-fast) var(--ease),transform var(--t-fast) var(--ease),color var(--t-fast) var(--ease);
+}
+/* Brillo que barre el botón al pasar por encima. Va detrás del texto gracias al
+   isolation:isolate de arriba, así que nunca lo tapa. */
+.btn::after{
+  content:'';
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(105deg,transparent 32%,rgba(255,255,255,.18) 50%,transparent 68%);
+  transform:translateX(-130%);
+  transition:transform .8s var(--ease);
+  pointer-events:none;
+}
+.btn:hover::after,.btn:focus-visible::after{transform:translateX(130%)}
+
+.btn{box-shadow:0 0 0 0 rgba(21,19,16,0);transition:background var(--t-fast) var(--ease),transform var(--t-fast) var(--ease),color var(--t-fast) var(--ease),box-shadow var(--t) var(--ease)}
+.btn:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 12px 26px -10px rgba(21,19,16,.5)}
+.btn:active{transform:translateY(0) scale(.985);box-shadow:0 2px 8px -4px rgba(21,19,16,.4)}
+/* Los botones magnéticos llevan su transform escrito por JS: la elevación se la
+   da el propio efecto, así que aquí solo se toca la sombra. */
+.btn.mag:hover{transform:none}
+.btn--ghost:hover{box-shadow:inset 0 0 0 1px rgba(193,96,63,.45),0 10px 24px -12px rgba(21,19,16,.4)}
+.on-dark .btn--ghost:hover{box-shadow:inset 0 0 0 1px rgba(250,248,245,.4),0 10px 24px -12px rgba(0,0,0,.5)}
+
+/* Las pestañas también responden */
+.tab{transform:translateZ(0);transition:color var(--t-fast) var(--ease),background var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease),transform var(--t-fast) var(--ease)}
+.tab:hover{transform:translateY(-1px)}
+.tab:active{transform:translateY(0) scale(.98)}
+
+/* Enlaces de correo de los packs */
+.plan__mail{transition:color var(--t-fast) var(--ease),transform var(--t-fast) var(--ease)}
+.plan__mail:hover{transform:translateY(-1px)}
+
+.btn--ghost{--btn-bg:transparent;--btn-fg:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn--ghost:hover{--btn-fg:var(--ink);background:var(--terra-soft);box-shadow:inset 0 0 0 1px rgba(193,96,63,.4)}
+.on-dark .btn--ghost{--btn-fg:var(--bone);box-shadow:inset 0 0 0 1px var(--line-dark)}
+.on-dark .btn--ghost:hover{background:rgba(250,248,245,.07)}
+
+.btn--light{--btn-bg:var(--bone);--btn-fg:var(--ink)}
+.btn--light:hover{background:#fff}
+
+.btn--ink{--btn-bg:var(--ink);--btn-fg:var(--bone)}
+.btn--ink:hover{background:#000}
+
+.btn--sm{min-height:42px;padding:.6rem 1.15rem;font-size:.875rem}
+.btn--block{width:100%}
+
+/* Roll-over de texto (tomado del sistema de MWG, adaptado) */
+.roll{display:grid;overflow:hidden;height:1.2em}
+.roll span{
+  grid-area:1/1;
+  display:block;
+  transition:transform var(--t) var(--ease);
+}
+.roll span:last-child{transform:translateY(100%)}
+.btn:hover .roll span:first-child{transform:translateY(-100%)}
+.btn:hover .roll span:last-child{transform:translateY(0)}
+
+/* En pantallas táctiles no hay hover: se desactiva el roll para que las
+   etiquetas largas puedan partirse en varias líneas en vez de cortarse. */
+@media (hover:none),(max-width:900px){
+  .roll{display:block;height:auto;overflow:visible}
+  .roll span:last-child{display:none}
+}
+
+/* Enlace de texto con subrayado que crece */
+.link{
+  position:relative;
+  display:inline-block;
+  color:var(--terra);
+  font-weight:500;
+}
+.link::after{
+  content:'';position:absolute;left:0;bottom:-2px;width:100%;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:right;
+  transition:transform var(--t) var(--ease);
+}
+.link:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* ---------- 7. NAVEGACIÓN ------------------------------------------------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,248,245,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--t) var(--ease),background var(--t) var(--ease);
+}
+.nav.stuck{border-bottom-color:var(--line)}
+.nav__in{
+  display:flex;align-items:center;gap:1.5rem;
+  height:72px;
+}
+.nav__logo{display:flex;align-items:center;flex:none}
+.nav__logo svg{height:26px;width:auto}
+.nav__links{
+  display:flex;align-items:center;gap:1.75rem;
+  margin-left:auto;
+}
+.nav__links a{
+  font-family:var(--mono);
+  font-size:var(--fs-label);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  position:relative;
+  padding-block:.35rem;
+  transition:color var(--t-fast) var(--ease);
+}
+.nav__links a:hover,.nav__links a.active{color:var(--ink)}
+.nav__links a.active::after{
+  content:'';position:absolute;left:50%;bottom:-2px;width:4px;height:4px;
+  border-radius:50%;background:var(--terra);transform:translateX(-50%);
+}
+.nav__right{display:flex;align-items:center;gap:.85rem;margin-left:auto}
+.nav__links + .nav__right{margin-left:1.5rem}
+
+/* Selector de idioma */
+.lang{
+  display:inline-flex;align-items:center;
+  border:1px solid var(--line);border-radius:var(--r-pill);
+  padding:2px;font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;
+}
+.lang a{
+  padding:.32rem .6rem;border-radius:var(--r-pill);color:var(--muted);
+  transition:background var(--t-fast) var(--ease),color var(--t-fast) var(--ease);
+}
+.lang a[aria-current="true"]{background:var(--ink);color:var(--bone)}
+
+/* La barra fija conserva siempre un CTA visible; en móvil se acorta la etiqueta */
+.cta-short{display:none}
+
+.burger{
+  display:none;
+  width:44px;height:44px;align-items:center;justify-content:center;
+  border-radius:50%;border:1px solid var(--line);
+}
+.burger span{display:block;width:16px;height:1.5px;background:var(--ink);position:relative;transition:background var(--t-fast) var(--ease)}
+.burger span::before,.burger span::after{
+  content:'';position:absolute;left:0;width:16px;height:1.5px;background:var(--ink);
+  transition:transform var(--t) var(--ease);
+}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+
+/* Con el menú abierto: la hamburguesa se convierte en aspa y el CTA de la barra
+   desaparece para no duplicarse con el del propio menú. */
+.nav.menu-open .burger span{background:transparent}
+.nav.menu-open .burger span::before{transform:translateY(5px) rotate(45deg)}
+.nav.menu-open .burger span::after{transform:translateY(-5px) rotate(-45deg)}
+.nav.menu-open .nav__right > .btn{opacity:0;pointer-events:none;transform:scale(.92)}
+.nav__right > .btn{transition:opacity var(--t) var(--ease),transform var(--t) var(--ease)}
+
+.menu{
+  position:fixed;inset:0;z-index:99;
+  background:var(--bone);
+  padding:6rem var(--margin) 2.5rem;
+  display:flex;flex-direction:column;gap:.5rem;
+  transform:translateY(-100%);
+  transition:transform var(--t-slow) var(--ease);
+  overflow-y:auto;
+}
+.menu.open{transform:translateY(0)}
+.menu a.menu__link{
+  font-family:var(--serif);font-size:clamp(2rem,9vw,3rem);line-height:1.25;
+  border-bottom:1px solid var(--line);padding-block:.6rem;
+}
+.menu__foot{margin-top:auto;padding-top:2rem;display:flex;flex-direction:column;gap:1rem}
+
+/* ---------- 8. HERO ------------------------------------------------------- */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;align-items:flex-end;
+  padding-top:5.5rem;padding-bottom:clamp(2rem,4vw,3.25rem);
+  background:var(--ink);
+  color:var(--bone);
+  overflow:hidden;
+}
+.hero__media{position:absolute;inset:0;z-index:0;overflow:hidden}
+/* Vídeo y respaldo ocupan el mismo hueco, superpuestos. El vídeo va encima:
+   si tarda o falla, lo que se ve debajo es la ilustración de respaldo. */
+.hero__media > *{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+/* El vídeo se gradúa en origen. Este es el truco que permite que el panel de
+   encima sea casi transparente: bajando el brillo se recortan los picos (la
+   ventana al jardín llegaba a 0,75 de luminancia y se comía el contraste del
+   texto), sin necesidad de una capa oscura gruesa por encima. El vídeo se
+   sigue viendo entero, solo que con una gradación más nocturna. */
+.hero__media video{z-index:1;filter:brightness(.58) saturate(1.05)}
+/* Velo ligero: solo el necesario para que el vídeo no compita con el texto.
+   El grueso de la legibilidad lo aporta el panel translúcido de debajo. */
+.hero__scrim{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to top,rgba(21,19,16,.42) 0%,rgba(21,19,16,.16) 55%,rgba(21,19,16,.08) 100%),
+    radial-gradient(130% 85% at 72% 18%,rgba(21,19,16,0) 0%,rgba(21,19,16,.14) 100%);
+}
+.hero__in{position:relative;z-index:2;width:100%}
+
+/* Panel del texto principal: translúcido sobre el vídeo, con desenfoque detrás.
+   Es lo que permite bajar el velo general y que se siga leyendo todo. */
+.hero__panel{
+  position:relative;
+  max-width:60rem;
+  padding:clamp(1.25rem,2.6vw,2rem) clamp(1.25rem,3vw,2.5rem) clamp(1.35rem,2.8vw,2.25rem);
+  border-radius:var(--r-l);
+  background:rgba(21,19,16,.10);
+  box-shadow:inset 0 0 0 1px rgba(250,248,245,.14);
+  backdrop-filter:blur(14px) saturate(1.06);
+  -webkit-backdrop-filter:blur(14px) saturate(1.06);
+  /* Halo oscuro pegado a las letras: da contraste local, independiente de lo
+     que pase por detrás. Es lo mismo que hacen los subtítulos sobre vídeo. */
+  text-shadow:0 1px 2px rgba(21,19,16,.8),0 0 16px rgba(21,19,16,.5);
+}
+/* En los botones estorba: tienen su propio fondo sólido */
+.hero__panel .btn{text-shadow:none}
+
+/* Si el navegador no soporta backdrop-filter no hay nada que suavice el vídeo,
+   así que ahí sí hace falta más masa oscura para que el texto se lea. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .hero__panel{background:rgba(21,19,16,.55)}
+}
+
+/* Texto del hero aclarado: sobre vídeo, los grises de la paleta se quedan por
+   debajo del contraste mínimo. Solo afecta al hero, no al resto del sitio. */
+.hero .dim{color:rgba(250,248,245,.66)}
+.hero .label{color:rgba(250,248,245,.93)}
+.hero .display{max-width:22ch}
+/* Especificidad a propósito: `.on-dark .lead` (dos clases) le ganaba a
+   `.hero__sub` (una) y dejaba el subtítulo en gris, con 2,1:1 sobre el vídeo. */
+.hero .lead.hero__sub{margin-top:1.75rem;max-width:52ch;color:rgba(250,248,245,.9)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.25rem}
+.hero__promise{
+  display:flex;align-items:center;gap:.6rem;
+  margin-top:1.5rem;
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(250,248,245,.93);
+}
+.hero__promise svg{flex:none;color:#E8926F}
+.hero__label{margin-bottom:1.5rem}
+.scroll-hint{
+  position:absolute;right:var(--margin);bottom:clamp(2.5rem,6vw,4.5rem);z-index:2;
+  writing-mode:vertical-rl;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(250,248,245,.5);
+}
+
+/* ---------- 9. BARRA DE CONFIANZA ---------------------------------------- */
+.stats{border-bottom:1px solid var(--line);background:var(--bone)}
+.stats__grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stats__item{
+  padding:clamp(1.75rem,4vw,3rem) 1rem;
+  border-right:1px solid var(--line);
+  text-align:center;
+}
+.stats__item:last-child{border-right:0}
+.stats__n{
+  font-family:var(--serif);font-size:clamp(2rem,4.8vw,3.5rem);line-height:1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+}
+.stats__l{margin-top:.6rem;display:block}
+
+/* ---------- 9 bis. DATOS DEL SECTOR --------------------------------------- */
+/* Cifras de terceros, nunca nuestras. La fuente va debajo de cada una y a la
+   vista: en una web que vende, un dato sin fuente es una promesa vacía, y
+   además la ley de publicidad no perdona las cifras inventadas. */
+.proof{margin-top:clamp(2.5rem,6vw,4.5rem)}
+.proof__grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;
+}
+.proof__item{background:var(--bone);padding:clamp(1.5rem,3.4vw,2.5rem)}
+.proof__n{
+  display:block;font-family:var(--serif);
+  font-size:clamp(2.25rem,5.2vw,3.75rem);line-height:1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--terra);
+}
+.proof__t{margin:.85rem 0 0;font-size:var(--fs-small);line-height:1.6}
+.proof__src{
+  margin:.9rem 0 0;padding-top:.75rem;border-top:1px solid var(--line);
+  color:var(--muted);font-family:var(--mono);font-size:var(--fs-label);
+  letter-spacing:.07em;text-transform:uppercase;line-height:1.55;
+}
+.proof__note{margin:1.15rem 0 0;color:var(--muted);font-size:var(--fs-small);max-width:64ch}
+@media (max-width:860px){.proof__grid{grid-template-columns:1fr}}
+
+/* ---------- 10. COMPARADOR ANTES / DESPUÉS -------------------------------- */
+/* El bloque más importante del sitio: en un negocio 100% remoto es toda la
+   prueba disponible. Por eso es grande y protagonista. */
+.ba{
+  position:relative;
+  border-radius:var(--r-l);
+  overflow:hidden;
+  background:var(--ink-2);
+  --pos:50%;      /* posición del comparador, con unidad, para el clip-path */
+  --posn:50;      /* la misma posición sin unidad, para poder calcular píxeles */
+  touch-action:pan-y;
+  user-select:none;
+}
+.ba__layer{position:relative;width:100%;aspect-ratio:3/2}
+.ba__layer > *{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba__after{
+  position:absolute;inset:0;
+  clip-path:inset(0 0 0 var(--pos));
+}
+.ba__before{
+  position:absolute;inset:0;
+  clip-path:inset(0 calc(100% - var(--pos)) 0 0);
+  /* Efecto de enfoque: cuanto más "antes" se ve, más desenfocado está.
+     Al deslizar hacia el "después", la imagen entra en foco. Muy sutil. */
+  filter:blur(calc(var(--posn) * .032px)) saturate(.88);
+}
+.ba__handle{
+  position:absolute;top:0;bottom:0;left:var(--pos);width:2px;
+  background:var(--bone);
+  transform:translateX(-1px);
+  z-index:3;pointer-events:none;
+}
+.ba__knob{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;
+  background:var(--bone);color:var(--ink);
+  display:grid;place-items:center;
+  box-shadow:0 2px 14px rgba(21,19,16,.35);
+}
+.ba__knob svg{width:18px;height:18px}
+.ba__range{
+  position:absolute;inset:0;z-index:4;width:100%;height:100%;
+  opacity:0;cursor:ew-resize;margin:0;
+}
+.ba__tag{
+  position:absolute;top:14px;z-index:3;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;
+  background:rgba(21,19,16,.72);color:var(--bone);
+  padding:.35rem .65rem;border-radius:var(--r-pill);
+  backdrop-filter:blur(6px);
+}
+.ba__tag--b{left:14px}
+.ba__tag--a{right:14px;background:var(--terra)}
+.ba__cap{
+  display:flex;justify-content:space-between;gap:1rem;
+  margin-top:.9rem;
+}
+
+/* ---------- 11. LÍNEA DE TIEMPO (cómo funciona) --------------------------- */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border-top:1px solid var(--line);
+}
+.steps__item{
+  padding:2rem 1.5rem 0 0;
+  border-right:1px solid var(--line);
+  position:relative;
+}
+.steps__item:last-child{border-right:0;padding-right:0}
+.steps__item::before{
+  content:'';position:absolute;top:-4.5px;left:0;
+  width:8px;height:8px;border-radius:50%;background:var(--terra);
+}
+.steps__n{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.14em;color:var(--terra)}
+.steps__t{margin-top:1rem;font-family:var(--serif);font-size:1.4rem;line-height:1.2;letter-spacing:-.02em}
+.steps__d{margin-top:.75rem;font-size:var(--fs-small);color:var(--muted);line-height:1.6}
+.steps__note{
+  margin-top:clamp(3rem,6vw,5rem);
+  font-family:var(--serif);
+  font-size:clamp(1.5rem,4.2vw,3rem);
+  line-height:1.1;letter-spacing:-.025em;
+  max-width:22ch;
+}
+
+/* ---------- 12. PESTAÑAS -------------------------------------------------- */
+.tabs{
+  display:flex;flex-wrap:wrap;gap:.4rem;
+  margin-bottom:clamp(2rem,4vw,3rem);
+}
+.tab{
+  position:relative;
+  padding:.7rem 1.15rem;
+  border-radius:var(--r-pill);
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);
+  box-shadow:inset 0 0 0 1px var(--line);
+  transition:color var(--t-fast) var(--ease),background var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease);
+}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{
+  background:var(--ink);color:var(--bone);box-shadow:none;
+}
+.on-dark .tab{color:var(--muted-dark);box-shadow:inset 0 0 0 1px var(--line-dark)}
+.on-dark .tab:hover{color:var(--bone)}
+.on-dark .tab[aria-selected="true"]{background:var(--bone);color:var(--ink)}
+
+.panel[hidden]{display:none}
+
+/* ---------- 13. TARJETAS DE SERVICIO -------------------------------------- */
+.svc{
+  position:relative;
+  text-align:left;
+  width:100%;
+  display:flex;flex-direction:column;
+  padding:1.75rem;
+  background:var(--bone);
+  border-radius:var(--r-m);
+  box-shadow:inset 0 0 0 1px var(--line);
+  transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),background var(--t) var(--ease);
+}
+.svc:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px rgba(193,96,63,.35)}
+.svc__icon{color:var(--terra);margin-bottom:1.25rem}
+.svc__icon svg{width:26px;height:26px}
+.svc__t{font-family:var(--serif);font-size:1.3rem;line-height:1.2;letter-spacing:-.02em}
+.svc__b{margin-top:.5rem;font-size:var(--fs-small);color:var(--muted);line-height:1.6}
+/* Lo que incluye un SERVICIO va en un bloque hundido con cabecera propia.
+   Es el tercer formato del sitio y no se parece a los otros dos a propósito:
+     · packs    → lista con checks
+     · planes   → ficha técnica de etiqueta y valor
+     · servicios→ este bloque
+   La cabecera se genera en CSS según el idioma del documento, así que el HTML
+   no lleva ni una etiqueta de más y no hay que traducir nada a mano. */
+.svc__inc{
+  margin-top:1.25rem;
+  padding:.85rem 1rem 1rem;
+  background:var(--bone-2);
+  border-radius:var(--r-s);
+  display:flex;flex-direction:column;gap:.55rem;
+}
+.svc__inc::before{
+  content:'Incluye';
+  font-family:var(--mono);font-size:.5625rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--terra);
+  line-height:1;
+  margin-bottom:.2rem;
+}
+html[lang="en"] .svc__inc::before{content:'Included'}
+.svc__inc li{
+  font-size:.8125rem;color:var(--muted);line-height:1.45;
+}
+.svc--star .svc__inc{background:rgba(250,248,245,.06)}
+.svc--star .svc__inc::before{color:#E39273}
+.svc__foot{
+  margin-top:auto;padding-top:1.5rem;
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+}
+.svc__price{font-family:var(--serif);font-size:1.5rem;letter-spacing:-.02em}
+.svc__price small{font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.15rem}
+.svc__more{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;color:var(--terra)}
+
+.svc--star{background:var(--ink);color:var(--bone);box-shadow:none}
+.svc--star .svc__b,.svc--star .svc__inc li{color:var(--muted-dark)}
+.svc--star .svc__price small{color:var(--muted-dark)}
+.svc--star:hover{box-shadow:inset 0 0 0 1px rgba(193,96,63,.6)}
+
+/* ---------- 14. PRECIOS --------------------------------------------------- */
+.price-list{border-top:1px solid var(--line)}
+.price-row{
+  display:flex;align-items:baseline;gap:1rem;
+  padding:1.15rem 0;
+  border-bottom:1px solid var(--line);
+}
+.price-row__n{flex:1 1 auto;font-size:var(--fs-small)}
+.price-row__n small{display:block;color:var(--muted);font-size:.8125rem;margin-top:.15rem}
+.price-row__p{
+  flex:none;font-family:var(--serif);font-size:1.15rem;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+.price-row__p.free{font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ok)}
+
+.plan{
+  position:relative;
+  display:flex;flex-direction:column;
+  padding:2rem 1.75rem;
+  border-radius:var(--r-l);
+  background:var(--bone);
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.plan--hi{
+  background:var(--ink);color:var(--bone);box-shadow:none;
+}
+.plan--hi .body-s,.plan--hi .plan__inc li{color:var(--muted-dark)}
+.plan__tag{
+  position:absolute;top:-11px;left:1.75rem;
+  background:var(--terra);color:#fff;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.3rem .7rem;border-radius:var(--r-pill);
+}
+.plan__t{font-family:var(--serif);font-size:1.5rem;letter-spacing:-.02em;line-height:1.1}
+.plan__d{margin-top:.5rem;font-size:var(--fs-small);color:var(--muted);line-height:1.55;min-height:3.2em}
+.plan--hi .plan__d{color:var(--muted-dark)}
+.plan__p{
+  margin-top:1.5rem;display:flex;align-items:baseline;gap:.4rem;
+  font-family:var(--serif);font-size:clamp(2.25rem,4.5vw,3rem);letter-spacing:-.03em;line-height:1;
+}
+.plan__p span{font-family:var(--mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.plan--hi .plan__p span{color:var(--muted-dark)}
+.plan__save{
+  margin-top:.7rem;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--terra);
+}
+.plan--hi .plan__save{color:#E39273}
+/* Lo incluido en los PLANES se presenta como hoja de características, no como
+   lista de checks: los packs son "qué te llevas", los planes son "cuánto tienes
+   al mes". Formato distinto a propósito para que no se confundan de un vistazo. */
+.plan__spec{
+  margin:1.5rem 0 0;flex:1;
+  border-top:1px solid var(--line);
+}
+.plan--hi .plan__spec{border-top-color:var(--line-dark)}
+.plan__spec > div{
+  display:grid;
+  grid-template-columns:5.5rem 1fr;
+  gap:.75rem;
+  padding:.7rem 0;
+  border-bottom:1px solid var(--line);
+  align-items:baseline;
+}
+.plan--hi .plan__spec > div{border-bottom-color:var(--line-dark)}
+.plan__spec dt{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--terra);
+  line-height:1.6;
+}
+.plan--hi .plan__spec dt{color:#E39273}
+.plan__spec dd{
+  margin:0;font-size:.875rem;line-height:1.45;color:var(--ink);
+}
+.plan--hi .plan__spec dd{color:var(--bone)}
+.plan__spec dd b{font-weight:500;font-variant-numeric:tabular-nums}
+.plan__spec dd small{
+  display:block;margin-top:.15rem;font-size:.75rem;color:var(--muted);
+}
+.plan--hi .plan__spec dd small{color:var(--muted-dark)}
+.plan__cta{margin-top:1.75rem}
+.plan__foot{
+  margin-top:1rem;text-align:center;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.plan--hi .plan__foot{color:var(--muted-dark)}
+
+.toggle-wrap{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.toggle-wrap span{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.toggle-wrap span.on{color:var(--ink)}
+.on-dark .toggle-wrap span.on{color:var(--bone)}
+.switch{
+  position:relative;width:52px;height:28px;border-radius:var(--r-pill);
+  background:var(--ink);flex:none;transition:background var(--t) var(--ease);
+}
+.switch::after{
+  content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+  background:var(--bone);transition:transform var(--t) var(--ease);
+}
+.switch[aria-checked="true"]{background:var(--terra)}
+.switch[aria-checked="true"]::after{transform:translateX(24px)}
+.badge-save{
+  background:var(--terra-soft);color:var(--terra);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .6rem;border-radius:var(--r-pill);
+}
+
+.big-cta-line{
+  margin-top:clamp(2.5rem,5vw,4rem);
+  padding-top:2rem;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;
+}
+.on-dark .big-cta-line{border-top-color:var(--line-dark)}
+
+/* ---------- 15. PORTFOLIO (sección oscura) -------------------------------- */
+.case{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:center;
+}
+.case__media{
+  position:relative;border-radius:var(--r-l);overflow:hidden;background:var(--ink-2);
+  aspect-ratio:16/10;
+}
+.case__media video,.case__media .ph-fallback{width:100%;height:100%;object-fit:cover}
+.case__play{
+  position:absolute;inset:0;display:grid;place-items:center;z-index:3;
+  background:rgba(21,19,16,.25);
+  transition:background var(--t) var(--ease);
+}
+.case__play:hover{background:rgba(21,19,16,.1)}
+.case__play i{
+  width:74px;height:74px;border-radius:50%;background:var(--bone);color:var(--ink);
+  display:grid;place-items:center;transition:transform var(--t) var(--ease);
+}
+.case__play:hover i{transform:scale(1.07)}
+.case__meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+.chip{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.35rem .7rem;border-radius:var(--r-pill);
+  box-shadow:inset 0 0 0 1px var(--line-dark);color:var(--muted-dark);
+}
+.case__res{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  margin-top:1.75rem;padding-top:1.75rem;border-top:1px solid var(--line-dark);
+}
+.case__res b{display:block;font-family:var(--serif);font-size:1.75rem;letter-spacing:-.02em;line-height:1}
+.case__res span{display:block;margin-top:.4rem;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-dark)}
+
+.filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem}
+
+.mosaic{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+}
+.work{
+  position:relative;display:block;width:100%;text-align:left;
+  border-radius:var(--r-m);overflow:hidden;background:var(--ink-2);
+  aspect-ratio:4/5;
+  transition:transform var(--t) var(--ease);
+}
+.work:hover{transform:translateY(-4px)}
+.work .ph-fallback{position:absolute;inset:0;width:100%;height:100%}
+.work__info{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;
+  padding:1rem;
+  background:linear-gradient(to top,rgba(21,19,16,.9),transparent);
+}
+.work__t{font-family:var(--serif);font-size:1.05rem;line-height:1.2;letter-spacing:-.02em;color:var(--bone)}
+.work__s{margin-top:.2rem;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-dark)}
+.work[hidden]{display:none}
+
+/* ---------- 16. OPINIONES ------------------------------------------------- */
+.rev{
+  display:flex;flex-direction:column;
+  padding:1.75rem;border-radius:var(--r-m);
+  background:var(--bone);box-shadow:inset 0 0 0 1px var(--line);
+}
+.rev__stars{display:flex;gap:2px;color:var(--terra);margin-bottom:1rem}
+.rev__stars svg{width:14px;height:14px}
+.rev__q{font-size:var(--fs-small);line-height:1.65;flex:1}
+.rev__who{display:flex;align-items:center;gap:.85rem;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+.rev__ph{width:44px;height:44px;border-radius:50%;overflow:hidden;flex:none;background:var(--bone-2)}
+.rev__ph img,.rev__ph .ph-fallback{width:100%;height:100%;object-fit:cover}
+.rev__n{font-weight:500;font-size:.9375rem;line-height:1.2}
+.rev__m{margin-top:.15rem;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- 17. SOBRE NOSOTROS -------------------------------------------- */
+.about{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(1.5rem,4vw,4rem);align-items:center}
+/* Variante sin foto: solo texto, a una columna y con medida de lectura cómoda */
+.about--solo{display:block;max-width:60rem}
+.about__ph{border-radius:var(--r-l);overflow:hidden;aspect-ratio:4/5;background:var(--bone-2);position:relative}
+.about__ph img,.about__ph .ph-fallback{width:100%;height:100%;object-fit:cover}
+.trust-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.75rem}
+.trust-row .chip{box-shadow:inset 0 0 0 1px var(--line);color:var(--muted)}
+
+/* ---------- 18. FAQ ------------------------------------------------------- */
+.faq{border-top:1px solid var(--line);max-width:52rem}
+.faq__i{border-bottom:1px solid var(--line)}
+.faq__q{
+  width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;
+  padding:1.35rem 0;text-align:left;
+  font-family:var(--serif);font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.3;letter-spacing:-.02em;
+}
+.faq__ic{flex:none;width:20px;height:20px;position:relative;margin-top:.35rem}
+.faq__ic::before,.faq__ic::after{
+  content:'';position:absolute;top:50%;left:50%;background:var(--terra);
+  transform:translate(-50%,-50%);transition:opacity var(--t-fast) var(--ease),transform var(--t) var(--ease);
+}
+.faq__ic::before{width:14px;height:1.5px}
+.faq__ic::after{width:1.5px;height:14px}
+.faq__q[aria-expanded="true"] .faq__ic::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+.faq__a{overflow:hidden;height:0;transition:height var(--t) var(--ease)}
+.faq__a > div{padding-bottom:1.5rem;max-width:60ch;color:var(--muted);font-size:var(--fs-small);line-height:1.7}
+
+/* ---------- 19. FORMULARIO ------------------------------------------------ */
+/* Etiqueta de lo que el visitante ha elegido antes de llegar al formulario.
+   La rellena app.js → picks() al pulsar un pack, un plan o un servicio. */
+.pick-note{
+  display:inline-flex;align-items:center;gap:.55rem;
+  align-self:start;
+  padding:.5rem .9rem;border-radius:var(--r-pill);
+  background:rgba(193,96,63,.16);
+  box-shadow:inset 0 0 0 1px rgba(193,96,63,.45);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;
+  color:#E8926F;line-height:1.4;
+}
+.pick-note::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}
+.pick-note[hidden]{display:none}
+
+/* Enlace pequeño de "escribir por email" bajo el botón principal de cada pack */
+.plan__mail{
+  display:block;margin-top:.7rem;text-align:center;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line);
+  transition:color var(--t-fast) var(--ease);
+}
+.plan__mail:hover{color:var(--terra)}
+.plan--hi .plan__mail{color:var(--muted-dark)}
+.plan--hi .plan__mail:hover{color:#E8926F}
+
+/* Campo trampa antispam. No se usa display:none a propósito: algunos robots lo
+   detectan y lo saltan. Así queda fuera de la vista y fuera del recorrido de
+   tabulación, pero sigue existiendo para quien rellena a ciegas. */
+.hp{
+  position:absolute!important;left:-9999px!important;top:auto!important;
+  width:1px!important;height:1px!important;overflow:hidden!important;
+  opacity:0!important;pointer-events:none!important;
+}
+
+/* Aviso de error del formulario. Solo aparece si el servidor rechaza el envío,
+   así que en uso normal no se ve y el diseño no cambia. */
+.form-error{
+  margin:0;padding:.85rem 1.05rem;border-radius:var(--r-m);
+  background:rgba(240,135,111,.14);
+  box-shadow:inset 0 0 0 1px rgba(240,135,111,.45);
+  color:#F5A88F;font-size:.875rem;line-height:1.5;
+}
+.form-error[hidden]{display:none}
+
+.form{display:grid;gap:1.1rem}
+.field{display:flex;flex-direction:column;gap:.45rem}
+.field label{
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted-dark);
+}
+.field input,.field select,.field textarea{
+  width:100%;
+  padding:.9rem 1rem;
+  background:rgba(250,248,245,.05);
+  border:1px solid var(--line-dark);
+  border-radius:var(--r-m);
+  color:var(--bone);
+  font-size:.9375rem;
+  transition:border-color var(--t-fast) var(--ease),background var(--t-fast) var(--ease);
+}
+.field textarea{min-height:104px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:rgba(250,248,245,.38)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--terra);background:rgba(250,248,245,.08);outline:none;
+}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9086' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.field select option{background:var(--ink);color:var(--bone)}
+.field .err{
+  font-family:var(--sans);font-size:.8125rem;color:#F0876F;letter-spacing:0;text-transform:none;
+  display:none;
+}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:#F0876F}
+.field.invalid .err{display:block}
+.form .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+
+/* Zona de subida de fotos — es el paso clave del modelo de negocio */
+.drop{
+  position:relative;
+  border:1.5px dashed rgba(250,248,245,.28);
+  border-radius:var(--r-l);
+  padding:1.75rem 1.5rem;
+  text-align:center;
+  transition:border-color var(--t-fast) var(--ease),background var(--t-fast) var(--ease);
+  background:rgba(193,96,63,.06);
+}
+.drop:hover,.drop.over{border-color:var(--terra);background:rgba(193,96,63,.12)}
+.drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop__ic{color:var(--terra);margin:0 auto .75rem}
+.drop__t{font-family:var(--serif);font-size:1.2rem;letter-spacing:-.02em}
+.drop__s{margin-top:.35rem;font-size:.8125rem;color:var(--muted-dark)}
+.drop__files{margin-top:.85rem;font-family:var(--mono);font-size:.6875rem;letter-spacing:.06em;color:var(--terra)}
+.form-sep{display:flex;align-items:center;gap:1rem;font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dark)}
+.form-sep::before,.form-sep::after{content:'';flex:1;height:1px;background:var(--line-dark)}
+
+.form__legal{font-size:.75rem;color:var(--muted-dark);line-height:1.6}
+.form__legal a{color:var(--bone);text-decoration:underline;text-underline-offset:2px}
+
+.sent{
+  display:none;
+  padding:clamp(2rem,5vw,3.5rem);
+  border-radius:var(--r-l);
+  background:rgba(250,248,245,.05);
+  box-shadow:inset 0 0 0 1px var(--line-dark);
+  text-align:center;
+}
+.sent.on{display:block}
+.sent__ic{
+  width:64px;height:64px;border-radius:50%;background:var(--terra);color:#fff;
+  display:grid;place-items:center;margin:0 auto 1.5rem;
+}
+form.done{display:none}
+
+/* ---------- 20. MODAL ----------------------------------------------------- */
+.modal{
+  position:fixed;inset:0;z-index:200;
+  display:none;
+  padding:1rem;
+  align-items:center;justify-content:center;
+}
+.modal.open{display:flex}
+.modal__bg{position:absolute;inset:0;background:rgba(21,19,16,.75);backdrop-filter:blur(6px)}
+.modal__box{
+  position:relative;z-index:2;
+  width:min(58rem,100%);
+  max-height:88svh;overflow-y:auto;
+  background:var(--bone);color:var(--ink);
+  border-radius:var(--r-l);
+  padding:clamp(1.5rem,4vw,2.75rem);
+  animation:pop .45s var(--ease);
+}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+.modal__x{
+  position:absolute;top:1rem;right:1rem;z-index:3;
+  width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;
+  box-shadow:inset 0 0 0 1px var(--line);
+  background:var(--bone);
+  transition:background var(--t-fast) var(--ease);
+}
+.modal__x:hover{background:var(--bone-2)}
+.modal__grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
+.spec{border-top:1px solid var(--line)}
+.spec div{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line);font-size:.875rem}
+.spec dt{color:var(--muted);flex:none}
+.spec dd{margin:0;text-align:right;font-weight:500}
+.spec dd small{
+  display:block;margin-top:.25rem;
+  font-weight:400;font-size:.75rem;line-height:1.45;color:var(--muted);
+}
+
+/* ---------- 21. PIE ------------------------------------------------------- */
+.foot{background:var(--ink);color:var(--bone);padding-block:clamp(3.5rem,7vw,5.5rem) 2rem}
+.foot__top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
+.foot__logo svg{height:28px;width:auto;color:var(--bone)}
+.foot h4{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dark);font-weight:500;margin-bottom:1rem}
+.foot li{margin-bottom:.6rem;font-size:.875rem}
+.foot li a{color:rgba(250,248,245,.78);transition:color var(--t-fast) var(--ease)}
+.foot li a:hover{color:var(--bone)}
+.foot__bot{
+  margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;border-top:1px solid var(--line-dark);
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-dark);
+}
+.foot__bot a:hover{color:var(--bone)}
+
+/* ---------- 22. WHATSAPP FLOTANTE ---------------------------------------- */
+.wa{
+  position:fixed;right:16px;bottom:16px;z-index:90;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--ink);color:var(--bone);
+  display:grid;place-items:center;
+  box-shadow:0 6px 24px rgba(21,19,16,.28);
+  transform:translateY(120%);
+  transition:transform var(--t-slow) var(--ease),background var(--t-fast) var(--ease);
+}
+.wa.on{transform:translateY(0)}
+.wa:hover{background:var(--terra)}
+.wa svg{width:24px;height:24px}
+
+/* ---------- 23. PLACEHOLDERS --------------------------------------------- */
+/* Marcadores de posición generados en SVG por app.js. Sustituir por <img>/<video>
+   reales. Ver README.md → "Qué tengo que preparar". */
+.ph-fallback{display:block;width:100%;height:100%}
+/* Al sustituir un marcador por una imagen o un vídeo reales, basta con meter el
+   <img> o el <video> dentro del contenedor [data-ph]: esta regla lo encaja. */
+[data-ph] > img,[data-ph] > video{
+  display:block;width:100%;height:100%;object-fit:cover;
+}
+.ph-note{
+  position:absolute;top:10px;left:10px;z-index:4;
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;
+  background:rgba(21,19,16,.6);color:rgba(250,248,245,.8);
+  padding:.25rem .5rem;border-radius:3px;pointer-events:none;
+}
+
+/* ---------- 23b. PÁGINAS LEGALES ----------------------------------------- */
+.doc{max-width:46rem;padding-top:7rem}
+.doc h2{font-family:var(--serif);font-size:clamp(1.25rem,2.6vw,1.6rem);letter-spacing:-.02em;line-height:1.2;margin:2.5rem 0 .75rem}
+.doc h3{font-family:var(--serif);font-size:1.1rem;letter-spacing:-.015em;margin:1.75rem 0 .5rem}
+.doc p,.doc li{font-size:.9375rem;line-height:1.75;color:var(--muted);margin-bottom:.85rem}
+.doc ul{margin:0 0 1rem 1.1rem;list-style:disc}
+.doc li{margin-bottom:.4rem}
+.doc a{color:var(--terra);text-decoration:underline;text-underline-offset:2px}
+.doc__back{display:inline-block;margin-top:3rem}
+.doc__todo{
+  background:var(--terra-soft);border-left:3px solid var(--terra);
+  padding:1rem 1.25rem;border-radius:0 var(--r-m) var(--r-m) 0;margin-bottom:2rem;
+}
+.doc__todo p{margin:0;color:var(--ink)}
+
+/* ---------- 23c. MOVIMIENTO AÑADIDO -------------------------------------- */
+/* Todo lo de este bloque es transform/opacity puro: no provoca reflow y va a
+   60 fps. Se desactiva entero con prefers-reduced-motion (bloque 24). */
+
+/* Barra de progreso de lectura, pegada al borde inferior de la navegación */
+.progress{
+  position:absolute;left:0;bottom:-1px;height:2px;width:100%;
+  transform:scaleX(0);transform-origin:0 50%;
+  background:var(--terra);
+  will-change:transform;
+}
+
+/* Marquesina infinita — la firma rítmica del sistema de referencia */
+.marquee{
+  overflow:hidden;
+  padding-block:clamp(1.75rem,4vw,3rem);
+  border-block:1px solid var(--line-dark);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.marquee__track{
+  display:flex;width:max-content;
+  animation:slide 46s linear infinite;
+  will-change:transform;
+}
+.marquee:hover .marquee__track{animation-play-state:paused}
+.marquee__group{display:flex;flex:none}
+.marquee__group span{
+  display:inline-flex;align-items:center;flex:none;
+  padding-inline:clamp(1.25rem,3vw,2.5rem);
+  font-family:var(--serif);
+  font-size:clamp(1.5rem,4vw,2.75rem);
+  line-height:1.1;letter-spacing:-.025em;
+  color:var(--bone);
+  white-space:nowrap;
+}
+.marquee__group span::after{
+  content:'';
+  width:7px;height:7px;border-radius:50%;
+  background:var(--terra);
+  margin-left:clamp(1.25rem,3vw,2.5rem);
+  flex:none;
+}
+.marquee__group span:nth-child(even){color:var(--muted-dark)}
+@keyframes slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+/* Parallax suave: JS escribe --py en píxeles */
+.par{transform:translate3d(0,var(--py,0px),0);will-change:transform}
+
+/* Revelado por máscara palabra a palabra en los titulares de sección */
+/* OJO: aquí NO se toca `display`. La clase la recibe el propio titular, y
+   ponerle display:inline lo sacaba del flujo de bloque: en un contenedor flex
+   no se notaba (los hijos se blockifican), pero en uno normal el titular subía
+   por encima de su etiqueta. Las palabras ya son inline-block por su cuenta. */
+.words{}
+/* El padding-bottom compensado deja sitio a los trazos descendentes (g, j, p, y):
+   sin él, overflow:hidden se los come. */
+.words .w{
+  display:inline-block;overflow:hidden;vertical-align:top;
+  padding-bottom:.14em;margin-bottom:-.14em;
+}
+.words .w > i{
+  display:inline-block;font-style:inherit;
+  transform:translateY(110%);
+  transition:transform .9s var(--ease);
+  transition-delay:calc(var(--i) * 45ms);
+}
+.words.in .w > i{transform:translateY(0)}
+
+/* Botones magnéticos (solo con ratón) */
+.mag{will-change:transform}
+
+/* Cursor de enfoque: las cuatro escuadras de la marca siguen al puntero.
+   Es el motivo de identidad convertido en interacción. */
+.fcursor{
+  position:fixed;top:0;left:0;z-index:300;
+  width:38px;height:38px;
+  margin:-19px 0 0 -19px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .35s var(--ease),width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease);
+  mix-blend-mode:difference;
+}
+.fcursor.on{opacity:1}
+.fcursor.lock{width:64px;height:64px;margin:-32px 0 0 -32px}
+.fcursor i{
+  position:absolute;width:10px;height:10px;
+  border:1.5px solid #C1603F;
+}
+.fcursor i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
+.fcursor i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
+.fcursor i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
+.fcursor i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
+
+/* ---------- 23d. CESIÓN DEL MOVIMIENTO A GSAP ---------------------------- */
+/* Cuando motion.js entra en juego marca <html class="gsap-on">. A partir de ahí
+   las transiciones y animaciones CSS se apagan para que no compitan con GSAP,
+   pero los estados de PARTIDA (opacity:0, desplazamientos) se conservan: son los
+   que evitan que se vea el contenido saltar antes de animarse. */
+html.gsap-on .rise,
+html.gsap-on .mask > span,
+html.gsap-on .words .w > i{transition:none}
+html.gsap-on .marquee__track{animation:none}
+html.gsap-on .marquee:hover .marquee__track{animation-play-state:running}
+
+/* Línea de tiempo de "cómo funciona": se dibuja con el scroll en vez de estar
+   pintada de golpe. Solo en escritorio, donde la retícula es horizontal. */
+.steps{position:relative}
+@media (min-width:901px){
+  html.gsap-on .steps{border-top-color:transparent}
+  html.gsap-on .steps::before{
+    content:'';position:absolute;top:-1px;left:0;height:1px;
+    width:var(--linea,0%);
+    background:var(--line);
+  }
+}
+
+/* ---------- 24. ANIMACIÓN DE ENTRADA ------------------------------------- */
+.rise{opacity:0;transform:translateY(22px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rise.in{opacity:1;transform:none}
+.rise-d1{transition-delay:.08s}
+.rise-d2{transition-delay:.16s}
+.rise-d3{transition-delay:.24s}
+.rise-d4{transition-delay:.32s}
+
+/* Revelado por máscara para el titular del hero (línea a línea) */
+.mask{display:block;overflow:hidden}
+.mask > span{display:block;transform:translateY(105%);transition:transform 1.05s var(--ease)}
+.mask.in > span{transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+  .rise{opacity:1;transform:none}
+  .mask > span{transform:none}
+  .words .w > i{transform:none}
+  .ba__before{filter:none}
+  .wa{transform:none}
+  .marquee__track{animation:none;transform:none}
+  .marquee{-webkit-mask-image:none;mask-image:none}
+  .par{transform:none}
+  .fcursor{display:none}
+  .progress{display:none}
+}
+
+/* ---------- 25. RESPONSIVE ----------------------------------------------- */
+@media (max-width:1080px){
+  .four{grid-template-columns:repeat(2,1fr)}
+  .mosaic{grid-template-columns:repeat(2,1fr)}
+  .foot__top{grid-template-columns:1fr 1fr}
+}
+
+@media (max-width:900px){
+  .nav__links{display:none}
+  .burger{display:inline-flex}
+  .cta-long{display:none}
+  .cta-short{display:inline}
+  .nav__right{gap:.5rem}
+  .three{grid-template-columns:1fr}
+  .case{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr}
+  .about__ph{aspect-ratio:3/2;max-height:60svh}
+  .modal__grid{grid-template-columns:1fr;gap:1.25rem}
+  .steps{grid-template-columns:1fr 1fr;border-top:0}
+  .steps__item{border-right:0;border-top:1px solid var(--line);padding:1.75rem 1.25rem 1.75rem 0}
+  .steps__item::before{top:-4.5px}
+}
+
+/* Por debajo de 560px no cabe todo en la barra: el selector de idioma se
+   traslada al menú y se compacta el logo y el CTA. */
+@media (max-width:560px){
+  .nav__right > .lang{display:none}
+  .nav__logo svg{height:22px}
+  .nav__right > .btn--sm{padding:.55rem .95rem;font-size:.8125rem;min-height:40px}
+  .menu__lang{display:flex}
+}
+.menu__lang{display:none;justify-content:center;margin-top:.5rem}
+
+@media (max-width:640px){
+  :root{--gap:1rem}
+  .two,.two-col,.form .two-col{grid-template-columns:1fr}
+  .stats__grid{grid-template-columns:1fr 1fr}
+  .stats__item:nth-child(2n){border-right:0}
+  .stats__item:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .steps{grid-template-columns:1fr}
+  .mosaic{grid-template-columns:1fr 1fr;gap:.6rem}
+  .case__res{grid-template-columns:1fr;gap:.75rem}
+  .case__res div{display:flex;align-items:baseline;gap:.6rem}
+  .case__res span{margin-top:0}
+  .foot__top{grid-template-columns:1fr;gap:2rem}
+  .hero__cta .btn{width:100%}
+  /* En móvil se recorta el aire del hero para que quepa justo en una pantalla */
+  .hero{padding-top:4.5rem}
+  /* El panel ocupa casi toda la pantalla, así que aquí un desenfoque grande se
+     recalcularía en cada fotograma del vídeo y costaría fluidez en móviles
+     antiguos. Se baja el desenfoque y se sube un punto el fondo para compensar:
+     sigue siendo más transparente que antes y se ve más vídeo detrás. */
+  .hero__panel{
+    padding:1.1rem 1.15rem 1.35rem;
+    background:rgba(21,19,16,.15);
+    backdrop-filter:blur(9px) saturate(1.05);
+    -webkit-backdrop-filter:blur(9px) saturate(1.05);
+  }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .hero__panel{background:rgba(21,19,16,.58)}
+  }
+  .ba__layer{aspect-ratio:4/3}
+  .scroll-hint{display:none}
+  .work{aspect-ratio:1/1}
+  .rev__q{font-size:.9375rem}
+  .plan__spec > div{grid-template-columns:1fr;gap:.2rem;padding:.65rem 0}
+  .plan__spec dt{line-height:1.4}
+}

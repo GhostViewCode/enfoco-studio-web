@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -File \"C:\\\\Users\\\\adham\\\\Desktop\\\\ADIUM\\\\AgencyVideos\\\\Malaga1\" | Select-Object Name, @{n='MB';e={[math]::Round\\($_.Length/1MB,2\\)}}, LastWriteTime | Sort-Object Name | Format-Table -AutoSize)",
+      "PowerShell(\"copia de seguridad borrada \\(el original sigue en foto1-foto2\\)\")",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "PowerShell(\"servidor local detenido\")",
+      "Bash(cp \"C:/Users/adham/AppData/Local/Temp/claude/C--Users-adham-Desktop-ADIUM-AgencyVideos-WebPage/4362cae9-5cdd-4479-9f5a-0f9f804abfd6/scratchpad/ver-correo.mjs\" ./_ver-correo.mjs)",
+      "Bash(sed -i \"s|'../../../../../Desktop/ADIUM/AgencyVideos/WebPage/server/contacto.js'|'./server/contacto.js'|\" ./_ver-correo.mjs)",
+      "Bash(node ./_ver-correo.mjs)",
+      "Bash(rm -f ./_ver-correo.mjs)",
+      "PowerShell(\"servidor detenido\")",
+      "WebSearch",
+      "WebFetch(domain:help.vrbo.com)",
+      "WebFetch(domain:www.expediagroup.com)",
+      "WebFetch(domain:ir.expediagroup.com)",
+      "WebFetch(domain:www.airbnb.com)",
+      "WebFetch(domain:www.expedia.com)",
+      "WebFetch(domain:partner.expediagroup.com)",
+      "Bash(cp \"C:/Users/adham/AppData/Local/Temp/claude/C--Users-adham-Desktop-ADIUM-AgencyVideos-WebPage/4362cae9-5cdd-4479-9f5a-0f9f804abfd6/scratchpad/ver-correo.mjs\" ./_ver.mjs)",
+      "Bash(sed -i \"s|'../../../../../Desktop/ADIUM/AgencyVideos/WebPage/server/contacto.js'|'./server/contacto.js'|\" ./_ver.mjs)",
+      "Bash(sed -i \"s|console.log\\('¿\\\\[object Object\\\\]? ->', objetos.length ? objetos.join\\(', '\\) : 'no'\\);|console.log\\('¿[object Object]? ->', objetos.length ? objetos.join\\(', '\\) : 'no'\\); if\\(i===1\\){console.log\\('--- texto plano del correo al cliente ---'\\); console.log\\(c.text\\);}|\" ./_ver.mjs)",
+      "Bash(node ./_ver.mjs)",
+      "Bash(rm -f ./_ver.mjs)",
+      "Bash(sed -i \"s|if \\(c.attachments\\)|if\\(i===1\\){console.log\\('--- texto plano del correo al cliente ---'\\);console.log\\(c.text\\);}\\\\n  if \\(c.attachments\\)|\" ./_ver.mjs)"
+    ]
+  }
+}

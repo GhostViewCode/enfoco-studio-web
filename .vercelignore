@@ -1,0 +1,8 @@
+# Cosas que no tienen que llegar al servidor de Vercel.
+# Ojo: server/ NO se puede excluir — la función de /api la necesita.
+
+.claude/
+netlify/
+.env
+.env.*
+*.log
