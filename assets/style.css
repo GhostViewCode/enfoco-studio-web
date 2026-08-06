@@ -1287,6 +1287,11 @@ html.gsap-on .marquee:hover .marquee__track{animation-play-state:running}
   .burger{display:inline-flex}
   .cta-long{display:none}
   .cta-short{display:inline}
+  /* Con los enlaces ocultos ya no queda nadie con margen automático que empuje
+     el grupo hacia la derecha: se quedaba flotando a media barra. Hay que
+     devolvérselo aquí y con esta especificidad, porque `.nav__links +
+     .nav__right` (0,2,0) le gana a `.nav__right` (0,1,0). */
+  .nav__links + .nav__right{margin-left:auto}
   .nav__right{gap:.5rem}
   .three{grid-template-columns:1fr}
   .case{grid-template-columns:1fr}
