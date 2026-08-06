@@ -297,9 +297,22 @@ export async function gestionarContacto({ cuerpo = {}, ip = 'desconocida', env =
   const RESERVA = 'En Foco Studio <onboarding@resend.dev>';
   const sinVerificar = (m) => /not verified|domain is not/i.test(m || '');
 
-  async function enviar(opciones) {
-    let r = await resend.emails.send({ ...opciones, from: remitente });
-    if (r.error && sinVerificar(r.error.message) && remitente !== RESERVA) {
+  /* Remitente del AVISO INTERNO. Tiene que ser distinto de la dirección que lo
+     recibe: un correo que llega de fuera diciendo venir de tu propia dirección
+     es el patrón clásico de suplantación, y Google Workspace lo manda a spam o
+     lo retiene aunque esté bien firmado. Con una dirección distinta del mismo
+     dominio (no hace falta que exista buzón: Resend firma cualquier dirección
+     del dominio verificado) el problema desaparece y el «responder» sigue
+     yendo al cliente. La confirmación al cliente sí sale de studio@, que es la
+     cara visible del estudio. */
+  const dominioDelDestino = String(destino).split('@')[1] || '';
+  const avisoDesde = env.NOTIFY_FROM ||
+    (dominioDelDestino ? `En Foco · Web <web@${dominioDelDestino}>` : remitente);
+
+  async function enviar(opciones, desde) {
+    const origen = desde || remitente;
+    let r = await resend.emails.send({ ...opciones, from: origen });
+    if (r.error && sinVerificar(r.error.message) && origen !== RESERVA) {
       console.warn('[contacto] Dominio sin verificar; reintentando desde', RESERVA);
       r = await resend.emails.send({ ...opciones, from: RESERVA });
     }
@@ -315,7 +328,7 @@ export async function gestionarContacto({ cuerpo = {}, ip = 'desconocida', env =
       html: aviso.html,
       text: aviso.texto,
       ...(attachments.length ? { attachments } : {})
-    });
+    }, avisoDesde);
     if (r1.error) throw new Error(r1.error.message || JSON.stringify(r1.error));
     apunta(ip, 'enviados');   // solo cuenta cupo lo que llega a salir
 

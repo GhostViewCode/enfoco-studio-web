@@ -138,8 +138,21 @@ Variables que usa:
 |---|---|
 | `RESEND_API_KEY` | La clave de Resend |
 | `CONTACT_EMAIL` | Dónde te llegan los avisos |
-| `MAIL_FROM` | Desde qué dirección salen los correos |
+| `MAIL_FROM` | Desde dónde sale la confirmación que ve el cliente |
+| `NOTIFY_FROM` | Desde dónde sale el aviso interno (opcional) |
 | `PORT` | Solo para el servidor local |
+
+### Por qué el aviso interno sale de otra dirección
+
+Un correo que entra desde fuera diciendo venir de **tu propia dirección** es el
+patrón clásico de suplantación, y Google Workspace lo retiene o lo manda a spam
+aunque esté firmado correctamente. Por eso el aviso sale de `web@enfoco.site` y
+no de `studio@enfoco.site`, que es quien lo recibe.
+
+No hace falta crear ese buzón: Resend puede firmar cualquier dirección del
+dominio verificado. El «responder» del aviso sigue yendo directo al cliente.
+Si algún día quieres otra dirección, ponla en `NOTIFY_FROM`; lo único que no
+debe hacer es coincidir con `CONTACT_EMAIL`.
 
 ### El dominio tiene que estar verificado
 
